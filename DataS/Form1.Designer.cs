@@ -61,8 +61,9 @@
             button3.Name = "button3";
             button3.Size = new Size(267, 137);
             button3.TabIndex = 3;
-            button3.Text = "yeet";
+            button3.Text = "Link List";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button4
             // 
