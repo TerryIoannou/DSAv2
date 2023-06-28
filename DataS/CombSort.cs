@@ -7,41 +7,40 @@ using System.Threading.Tasks;
 
 namespace DataS
 {
-        public static class CombSorting
+    public static class CombSorting
+    {
+        public static void CombSort(MyArrayList<int> data)
         {
-            public static void CombSort(ArrayList data)
+            double gap = data.Count;
+            bool swapped = true;
+
+            while (gap > 1 || swapped)
             {
-                double gap = data.Count;
-                bool swapped = true;
+                gap /= 1.247330950103979;
 
-                while (gap > 1 || swapped)
+                if (gap < 1)
+                    gap = 1;
+
+                int i = 0;
+                swapped = false;
+
+                while (i + (int)gap < data.Count)
                 {
-                    gap /= 1.247330950103979;
+                    int igap = i + (int)gap;
 
-                    if (gap < 1)
-                        gap = 1;
-
-                    int i = 0;
-                    swapped = false;
-
-                    while (i + gap < data.Count)
+                    if (data[i] > data[igap])
                     {
-                        int igap = i + (int)gap;
-
-                        if ((int)data[i] > (int)data[igap])
-                        {
-                            object temp = data[i];
-                            data[i] = data[igap];
-                            data[igap] = temp;
-                            swapped = true;
-                        }
-
-                        i++;
+                        int temp = data[i];
+                        data[i] = data[igap];
+                        data[igap] = temp;
+                        swapped = true;
                     }
+
+                    i++;
                 }
             }
-
-         }
- }
+        }
+    }
+}
 
 

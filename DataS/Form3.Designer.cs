@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             searchBox = new TextBox();
-            timeLabel = new Label();
+            timeLabelBT = new Label();
             ImportButton = new Button();
-            outPut = new Label();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
+            linearbutton = new Button();
+            binarybutton = new Button();
+            bubblebutton = new Button();
+            compbutton = new Button();
+            ListBox = new ListBox();
+            searchboxtwo = new TextBox();
             SuspendLayout();
             // 
             // searchBox
@@ -45,14 +46,14 @@
             searchBox.Size = new Size(125, 27);
             searchBox.TabIndex = 16;
             // 
-            // timeLabel
+            // timeLabelBT
             // 
-            timeLabel.AutoSize = true;
-            timeLabel.Location = new Point(319, 113);
-            timeLabel.Name = "timeLabel";
-            timeLabel.Size = new Size(57, 20);
-            timeLabel.TabIndex = 15;
-            timeLabel.Text = "TEsting";
+            timeLabelBT.AutoSize = true;
+            timeLabelBT.Location = new Point(321, 103);
+            timeLabelBT.Name = "timeLabelBT";
+            timeLabelBT.Size = new Size(57, 20);
+            timeLabelBT.TabIndex = 15;
+            timeLabelBT.Text = "TEsting";
             // 
             // ImportButton
             // 
@@ -63,69 +64,82 @@
             ImportButton.TabIndex = 14;
             ImportButton.Text = "Import CSV";
             ImportButton.UseVisualStyleBackColor = true;
+            ImportButton.Click += importButtonform3_Click;
             // 
-            // outPut
+            // linearbutton
             // 
-            outPut.AutoSize = true;
-            outPut.Location = new Point(319, 62);
-            outPut.Name = "outPut";
-            outPut.Size = new Size(57, 20);
-            outPut.TabIndex = 13;
-            outPut.Text = "TEsting";
+            linearbutton.Location = new Point(98, 344);
+            linearbutton.Margin = new Padding(3, 4, 3, 4);
+            linearbutton.Name = "linearbutton";
+            linearbutton.Size = new Size(128, 69);
+            linearbutton.TabIndex = 12;
+            linearbutton.Text = "Linear Search";
+            linearbutton.UseVisualStyleBackColor = true;
+            linearbutton.Click += linearbutton_Click;
             // 
-            // button4
+            // binarybutton
             // 
-            button4.Location = new Point(98, 344);
-            button4.Margin = new Padding(3, 4, 3, 4);
-            button4.Name = "button4";
-            button4.Size = new Size(128, 69);
-            button4.TabIndex = 12;
-            button4.Text = "Hash Search";
-            button4.UseVisualStyleBackColor = true;
+            binarybutton.Location = new Point(98, 222);
+            binarybutton.Margin = new Padding(3, 4, 3, 4);
+            binarybutton.Name = "binarybutton";
+            binarybutton.Size = new Size(128, 69);
+            binarybutton.TabIndex = 11;
+            binarybutton.Text = "Binery Search";
+            binarybutton.UseVisualStyleBackColor = true;
+            binarybutton.Click += binarybutton_Click;
             // 
-            // button3
+            // bubblebutton
             // 
-            button3.Location = new Point(98, 222);
-            button3.Margin = new Padding(3, 4, 3, 4);
-            button3.Name = "button3";
-            button3.Size = new Size(128, 69);
-            button3.TabIndex = 11;
-            button3.Text = "Binery Search";
-            button3.UseVisualStyleBackColor = true;
+            bubblebutton.Location = new Point(98, 113);
+            bubblebutton.Margin = new Padding(3, 4, 3, 4);
+            bubblebutton.Name = "bubblebutton";
+            bubblebutton.Size = new Size(128, 69);
+            bubblebutton.TabIndex = 10;
+            bubblebutton.Text = "BubbleSort";
+            bubblebutton.UseVisualStyleBackColor = true;
+            bubblebutton.Click += bubblebutton_Click;
             // 
-            // button2
+            // compbutton
             // 
-            button2.Location = new Point(98, 113);
-            button2.Margin = new Padding(3, 4, 3, 4);
-            button2.Name = "button2";
-            button2.Size = new Size(128, 69);
-            button2.TabIndex = 10;
-            button2.Text = "BubbleSort";
-            button2.UseVisualStyleBackColor = true;
+            compbutton.Location = new Point(98, 13);
+            compbutton.Margin = new Padding(3, 4, 3, 4);
+            compbutton.Name = "compbutton";
+            compbutton.Size = new Size(128, 69);
+            compbutton.TabIndex = 9;
+            compbutton.Text = "CombSort";
+            compbutton.UseVisualStyleBackColor = true;
+            compbutton.Click += compbutton_Click;
             // 
-            // button1
+            // ListBox
             // 
-            button1.Location = new Point(98, 13);
-            button1.Margin = new Padding(3, 4, 3, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(128, 69);
-            button1.TabIndex = 9;
-            button1.Text = "CombSort";
-            button1.UseVisualStyleBackColor = true;
+            ListBox.FormattingEnabled = true;
+            ListBox.ItemHeight = 20;
+            ListBox.Location = new Point(638, 103);
+            ListBox.Name = "ListBox";
+            ListBox.Size = new Size(128, 304);
+            ListBox.TabIndex = 17;
+            // 
+            // searchboxtwo
+            // 
+            searchboxtwo.Location = new Point(277, 365);
+            searchboxtwo.Name = "searchboxtwo";
+            searchboxtwo.Size = new Size(125, 27);
+            searchboxtwo.TabIndex = 18;
             // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(searchboxtwo);
+            Controls.Add(ListBox);
             Controls.Add(searchBox);
-            Controls.Add(timeLabel);
+            Controls.Add(timeLabelBT);
             Controls.Add(ImportButton);
-            Controls.Add(outPut);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(linearbutton);
+            Controls.Add(binarybutton);
+            Controls.Add(bubblebutton);
+            Controls.Add(compbutton);
             Name = "Form3";
             Text = "Form3";
             ResumeLayout(false);
@@ -135,12 +149,13 @@
         #endregion
 
         private TextBox searchBox;
-        private Label timeLabel;
+        private Label timeLabelBT;
         private Button ImportButton;
-        private Label outPut;
-        private Button button4;
-        private Button button3;
-        private Button button2;
-        private Button button1;
+        private Button linearbutton;
+        private Button binarybutton;
+        private Button bubblebutton;
+        private Button compbutton;
+        private ListBox ListBox;
+        private TextBox searchboxtwo;
     }
 }

@@ -14,8 +14,7 @@ namespace DataS
 {
     public partial class Form2 : Form
     {
-
-        private ArrayList data;
+        private MyArrayList<int> data;
 
         public Form2()
         {
@@ -24,7 +23,7 @@ namespace DataS
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // Initialize the form
+
         }
 
         private void importButton_Click(object sender, EventArgs e)
@@ -34,19 +33,19 @@ namespace DataS
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Read the CSV file and populate the data ArrayList
                 string[] lines = File.ReadAllLines(openFileDialog.FileName);
-                data = new ArrayList();
+                data = new MyArrayList<int>();
 
                 foreach (string line in lines)
                 {
                     if (int.TryParse(line, out int value))
                     {
                         data.Add(value);
+                        test.Items.Add(value);
                     }
                 }
 
-                MessageBox.Show("CSV file imported successfully!");
+                MessageBox.Show("CSV file imported!");
             }
         }
 
@@ -54,77 +53,111 @@ namespace DataS
         {
             if (data == null || data.Count == 0)
             {
-                MessageBox.Show("No data to sort. Please import a CSV file first.");
+                MessageBox.Show("No data.import CSV file first.");
                 return;
             }
 
-            // Perform the sorting and measure the time it takes
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
             CombSorting.CombSort(data);
 
             stopwatch.Stop();
+            TimeSpan elapsedTime = stopwatch.Elapsed;
 
-            // Display the sorted data and sorting time
-            timeLabel.Text = $"Time taken: {stopwatch.ElapsedMilliseconds} milliseconds";
+            timeLabel.Text = $"Elapsed Time: {elapsedTime.TotalMilliseconds} ms";
             DisplaySortedData();
-
-
+            UpdateListBox();
         }
-        private void button2_Click(object sender, EventArgs e)
+
+        private void DisplaySortedData()
+        {
+            string sortedData = string.Join(", ", data);
+        }
+
+        private void bubblesort_Click(object sender, EventArgs e)
         {
             if (data == null || data.Count == 0)
             {
-                MessageBox.Show("No data to sort. Please import a CSV file first.");
+                MessageBox.Show("No data.import CSV file first.");
                 return;
             }
 
-            // Perform the sorting and measure the time it takes
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
             BubbleSorting.BubbleSort(data);
 
             stopwatch.Stop();
+            TimeSpan elapsedTime = stopwatch.Elapsed;
 
-            // Display the sorted data and sorting time
-            timeLabel.Text = $"Time taken: {stopwatch.ElapsedMilliseconds} milliseconds";
+            timeLabel.Text = $"Elapsed Time: {elapsedTime.TotalMilliseconds} ms";
+
             DisplaySortedData();
-        }
-        private void DisplaySortedData()
-        {
-            // Create a string to store the sorted data
-            string sortedData = string.Join(", ", data);
-
-            // Display the sorted data in the label
-            outPut.Text = sortedData;
+            UpdateListBox();
         }
 
-        private void Button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             if (data == null || data.Count == 0)
             {
-                MessageBox.Show("No data to search. Please import a CSV file first.");
+                MessageBox.Show("No data.import CSV file first.");
                 return;
             }
 
             if (!int.TryParse(searchBox.Text, out int target))
             {
-                MessageBox.Show("Invalid search target. Please enter a valid integer value.");
+                MessageBox.Show("Incorrect number. InPut a valid integer.");
                 return;
             }
 
-            // Perform the binary search
             int index = BinarySearchAlgorithm.BinarySearch(data, target);
 
             if (index != -1)
             {
-                MessageBox.Show($"Target {target} found at index {index}.");
+                int foundNumber = data[index];
+                searchLabel.Text = $"Number found: {foundNumber}";
             }
             else
             {
-                MessageBox.Show($"Target {target} not found.");
+                searchLabel.Text = $"Number does not found.";
+            }
+
+            UpdateListBox();
+        }
+
+
+        private void UpdateListBox()
+        {
+            test.Items.Clear();
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                test.Items.Add(data[i]);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (data == null || data.Count == 0)
+            {
+                MessageBox.Show("No data. Import CSV file first.");
+                return;
+            }
+
+            int target;
+            if (int.TryParse(linearSearch.Text, out target))
+            {
+                int result = LinearSearch.LinearSearchAlgorithm(data, target);
+
+                if (result != -1)
+                    MessageBox.Show("Target found at index: " + result);
+                else
+                    MessageBox.Show("Target not found.");
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid integer.");
             }
         }
     }

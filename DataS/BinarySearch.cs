@@ -9,7 +9,7 @@ namespace DataS
 {
     public static class BinarySearchAlgorithm
     {
-        public static int BinarySearch(ArrayList data, int target)
+        public static int BinarySearch(MyArrayList<int> data, int target)
         {
             int left = 0;
             int right = data.Count - 1;
@@ -17,18 +17,17 @@ namespace DataS
             while (left <= right)
             {
                 int mid = left + (right - left) / 2;
-                int midValue = (int)data[mid];
 
-                if (midValue == target)
+                if (data[mid] == target)
                     return mid;
 
-                if (midValue < target)
+                if (data[mid] < target)
                     left = mid + 1;
                 else
                     right = mid - 1;
             }
 
-            return -1; // Target not found
+            return -1;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace DataS
 {
     public static class BubbleSorting
     {
-        public static void BubbleSort(ArrayList data)
+        public static void BubbleSort(MyArrayList<int> data)
         {
             int n = data.Count;
             bool swapped;
@@ -20,9 +20,9 @@ namespace DataS
 
                 for (int j = 0; j < n - i - 1; j++)
                 {
-                    if ((int)data[j] > (int)data[j + 1])
+                    if (data[j] > data[j + 1])
                     {
-                        object temp = data[j];
+                        int temp = data[j];
                         data[j] = data[j + 1];
                         data[j + 1] = temp;
                         swapped = true;

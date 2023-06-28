@@ -70,7 +70,7 @@
             button4.Name = "button4";
             button4.Size = new Size(267, 139);
             button4.TabIndex = 4;
-            button4.Text = "Hash Table";
+            button4.Text = "Binary Tree";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 

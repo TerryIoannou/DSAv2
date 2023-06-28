@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aspose.Cells.Drawing;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,166 +10,168 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DataS
 {
     public partial class Form3 : Form
     {
-         private Hashtable data;
+        private BinaryTree<int> data;
 
-    public Form3()
-    {
-        InitializeComponent();
-    }
 
-    private void MainForm_Load(object sender, EventArgs e)
-    {
-        // Initialize the form
-    }
-
-    private void importButton_Click(object sender, EventArgs e)
-    {
-        OpenFileDialog openFileDialog = new OpenFileDialog();
-        openFileDialog.Filter = "CSV Files|*.csv";
-
-        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        public Form3()
         {
-            // Read the CSV file and populate the data Hashtable
-            string[] lines = File.ReadAllLines(openFileDialog.FileName);
-            data = new Hashtable();
+            InitializeComponent();
+        }
+        private void importButtonform3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV Files|*.csv";
 
-            foreach (string line in lines)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (int.TryParse(line, out int value))
+                string[] lines = File.ReadAllLines(openFileDialog.FileName);
+                data = new BinaryTree<int>();
+
+                foreach (string line in lines)
                 {
-                    if (!data.ContainsKey(value))
+                    if (int.TryParse(line, out int value))
                     {
-                        data.Add(value, null);
+                        data.Insert(value);
+                        ListBox.Items.Add(value);
                     }
                 }
+
+                MessageBox.Show("CSV file imported!");
             }
-
-            MessageBox.Show("CSV file imported successfully!");
         }
-    }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            if (data == null || data.Count == 0)
+            // Initialize the form
+        }
+
+        private void compbutton_Click(object sender, EventArgs e)
+        {
+            if (data == null || data.Root == null)
             {
-                MessageBox.Show("No data to sort. Please import a CSV file first.");
+                MessageBox.Show("No data. Import CSV file first.");
                 return;
             }
-
-            // Perform the sorting and measure the time it takes
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            CombSortHashTable.SortHashtableValues(data);
+            CompSortBT.CombSort(data);
 
             stopwatch.Stop();
+            TimeSpan elapsedTime = stopwatch.Elapsed;
 
-            // Display the sorted data and sorting time
-            timeLabel.Text = $"Time taken: {stopwatch.ElapsedMilliseconds} milliseconds";
-            DisplaySortedData();
-        }
-        private void DisplaySortedData()
-        {
-            // Create a string to store the sorted data
-            StringBuilder sortedData = new StringBuilder();
+            ListBox.Items.Clear();
+            InorderTraversal(data.Root);
 
-            // Iterate through the sorted keys of the Hashtable
-            foreach (var key in data.Keys)
-            {
-                sortedData.Append(key.ToString());
-                sortedData.Append(", ");
-            }
+            timeLabelBT.Text = $"Elapsed Time: {elapsedTime.TotalMilliseconds} ms";
 
-            // Remove the trailing comma and space
-            if (sortedData.Length > 2)
-            {
-                sortedData.Length -= 2;
-            }
 
-            // Display the sorted data in the label
-            outPut.Text = sortedData.ToString();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void bubblebutton_Click(object sender, EventArgs e)
         {
-            if (data == null || data.Count == 0)
+            if (data == null || data.Root == null)
             {
-                MessageBox.Show("No data to sort. Please import a CSV file first.");
+                MessageBox.Show("No data. Import CSV file first.");
                 return;
             }
 
-            // Perform the sorting and measure the time it takes
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            BubbleSortHashTable.SortHashtableValues(data);
+            BubbleSortBT.BubbleSort(data);
 
             stopwatch.Stop();
+            TimeSpan elapsedTime = stopwatch.Elapsed;
 
-            // Display the sorted data and sorting time
-            timeLabel.Text = $"Time taken: {stopwatch.ElapsedMilliseconds} milliseconds";
-            DisplaySortedData();
+            ListBox.Items.Clear();
+            InorderTraversal(data.Root);
+
+            timeLabelBT.Text = $"Elapsed Time: {elapsedTime.TotalMilliseconds} ms";
+
         }
 
-
-
-        private void Button3_Click(object sender, EventArgs e)
+        private void InorderTraversal(BinaryTreeNode<int> currentNode)
         {
-            if (data == null || data.Count == 0)
+            if (currentNode == null)
+                return;
+
+            InorderTraversal(currentNode.Left);
+            ListBox.Items.Add(currentNode.Data);
+            InorderTraversal(currentNode.Right);
+
+        }
+
+        private void binarybutton_Click(object sender, EventArgs e)
+        {
+            if (data == null || data.Root == null)
             {
-                MessageBox.Show("No data to search. Please import a CSV file first.");
+                MessageBox.Show("Please import a CSV file first.");
                 return;
             }
 
-            if (!int.TryParse(searchBox.Text, out int target))
+            int target;
+            if (int.TryParse(searchBox.Text, out target))
             {
-                MessageBox.Show("Invalid search target. Please enter a valid integer value.");
-                return;
-            }
+                bool found = data.Search(target);
 
-            // Perform the binary search on the hashtable
-            bool found = BinarySearchHashTable.HashTableBinarySearch(data, target);
-
-            if (found)
-            {
-                MessageBox.Show($"Target {target} found.");
+                if (found)
+                {
+                    MessageBox.Show("Target found!.");
+                }
+                else
+                {
+                    MessageBox.Show("Target have not been found :).");
+                }
             }
             else
             {
-                MessageBox.Show($"Target {target} not found.");
+                MessageBox.Show("Input a proper Interger .");
             }
         }
 
-        private void Button4_Click(object sender, EventArgs e)
+
+        private void linearbutton_Click(object sender, EventArgs e)
         {
-            if (data == null || data.Count == 0)
+            if (data == null || data.Root == null)
             {
-                MessageBox.Show("No data to search. Please import a CSV file first.");
+                MessageBox.Show("Please import a CSV file first.");
                 return;
             }
 
-            if (!int.TryParse(searchBox.Text, out int target))
+            int target;
+            if (int.TryParse(searchboxtwo.Text, out target))
             {
-                MessageBox.Show("Invalid search target. Please enter a valid integer value.");
-                return;
-            }
+                LinearSearchBT<int> linearSearch = new LinearSearchBT<int>(data);
+                bool found = linearSearch.Search(target);
 
-            // Perform the hash table search
-            bool found = HashSearch.PerformSearch(data, target);
-
-            if (found)
-            {
-                MessageBox.Show($"Target {target} found.");
+                if (found)
+                {
+                    MessageBox.Show("Number FOUND!.");
+                }
+                else
+                {
+                    MessageBox.Show("This Number does not exist here.");
+                }
             }
             else
             {
-                MessageBox.Show($"Target {target} not found.");
+                MessageBox.Show("enter a valid integer to search.");
             }
         }
     }
+
+
 }
+
+
+
+
+
+
