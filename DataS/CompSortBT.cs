@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataS
 {
     public static class CompSortBT
     {
-        public static void CombSort(BinaryTree<int> data)
+        public static void CombSort<T>(BinaryTree<T> data) where T : IComparable<T>
         {
             bool swapped = true;
             double gap = data.Count;
-            BinaryTreeNode<int> rootNode = data.Root;
+            BinaryTreeNode<T> rootNode = data.Root;
 
             while (gap > 1 || swapped)
             {
@@ -28,20 +25,20 @@ namespace DataS
             data.Root = rootNode;
         }
 
-        private static BinaryTreeNode<int> CombSortPass(BinaryTreeNode<int> currentNode, double gap, out bool swapped)
+        private static BinaryTreeNode<T> CombSortPass<T>(BinaryTreeNode<T> currentNode, double gap, out bool swapped) where T : IComparable<T>
         {
-            BinaryTreeNode<int> root = currentNode;
+            BinaryTreeNode<T> root = currentNode;
             swapped = false;
             int count = GetNodeCount(currentNode);
 
             for (int i = 0; i + (int)gap < count; i++)
             {
-                BinaryTreeNode<int> currentNodeI = FindNodeByIndex(root, i);
-                BinaryTreeNode<int> currentNodeIGap = FindNodeByIndex(root, i + (int)gap);
+                BinaryTreeNode<T> currentNodeI = FindNodeByIndex(root, i);
+                BinaryTreeNode<T> currentNodeIGap = FindNodeByIndex(root, i + (int)gap);
 
-                if (currentNodeI.Data > currentNodeIGap.Data)
+                if (currentNodeI.Data.CompareTo(currentNodeIGap.Data) > 0)
                 {
-                    int temp = currentNodeI.Data;
+                    T temp = currentNodeI.Data;
                     currentNodeI.Data = currentNodeIGap.Data;
                     currentNodeIGap.Data = temp;
                     swapped = true;
@@ -51,7 +48,7 @@ namespace DataS
             return root;
         }
 
-        private static int GetNodeCount(BinaryTreeNode<int> currentNode)
+        private static int GetNodeCount<T>(BinaryTreeNode<T> currentNode)
         {
             if (currentNode == null)
                 return 0;
@@ -59,7 +56,7 @@ namespace DataS
             return GetNodeCount(currentNode.Left) + 1 + GetNodeCount(currentNode.Right);
         }
 
-        private static BinaryTreeNode<int> FindNodeByIndex(BinaryTreeNode<int> currentNode, int index)
+        private static BinaryTreeNode<T> FindNodeByIndex<T>(BinaryTreeNode<T> currentNode, int index)
         {
             int leftSubtreeCount = GetNodeCount(currentNode.Left);
 

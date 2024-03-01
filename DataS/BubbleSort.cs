@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataS
 {
@@ -23,6 +19,31 @@ namespace DataS
                     if (data[j] > data[j + 1])
                     {
                         int temp = data[j];
+                        data[j] = data[j + 1];
+                        data[j + 1] = temp;
+                        swapped = true;
+                    }
+                }
+
+                if (!swapped)
+                    break;
+            }
+        }
+
+        public static void BubbleSort(MyArrayList<string> data)
+        {
+            int n = data.Count;
+            bool swapped;
+
+            for (int i = 0; i < n - 1; i++)
+            {
+                swapped = false;
+
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (string.Compare(data[j], data[j + 1]) > 0)
+                    {
+                        string temp = data[j];
                         data[j] = data[j + 1];
                         data[j + 1] = temp;
                         swapped = true;

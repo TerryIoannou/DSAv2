@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataS
 {
     public static class CombSortLink
     {
-        public static int[] Sort(int[] arr)
+        public static T[] Sort<T>(T[] arr) where T : IComparable<T>
         {
             int n = arr.Length;
             int gap = n;
@@ -22,9 +19,9 @@ namespace DataS
 
                 for (int i = 0; i < n - gap; i++)
                 {
-                    if (arr[i] > arr[i + gap])
+                    if (arr[i].CompareTo(arr[i + gap]) > 0)
                     {
-                        int temp = arr[i];
+                        T temp = arr[i];
                         arr[i] = arr[i + gap];
                         arr[i + gap] = temp;
                         swapped = true;

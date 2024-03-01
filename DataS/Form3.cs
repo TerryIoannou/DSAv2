@@ -18,11 +18,11 @@ namespace DataS
     {
         private BinaryTree<int> data;
 
-
         public Form3()
         {
             InitializeComponent();
         }
+
         private void importButtonform3_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -31,14 +31,26 @@ namespace DataS
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string[] lines = File.ReadAllLines(openFileDialog.FileName);
-                data = new BinaryTree<int>();
+                data = new BinaryTree<int>(); // Modify data type to BinaryTree<int> to handle integers
 
                 foreach (string line in lines)
                 {
-                    if (int.TryParse(line, out int value))
+                    // Split the line by comma to handle CSV format
+                    string[] values = line.Split(',');
+
+                    foreach (string value in values)
                     {
-                        data.Insert(value);
-                        ListBox.Items.Add(value);
+                        // Parse each value to integer and add it to the binary tree and ListBox
+                        if (int.TryParse(value, out int intValue))
+                        {
+                            data.Insert(intValue);
+                            ListBox1.Items.Add(intValue);
+                        }
+                        else
+                        {
+                            // Handle parsing error if necessary
+                            MessageBox.Show($"Failed to parse value: {value} as an integer.");
+                        }
                     }
                 }
 
@@ -66,7 +78,7 @@ namespace DataS
             stopwatch.Stop();
             TimeSpan elapsedTime = stopwatch.Elapsed;
 
-            ListBox.Items.Clear();
+            ListBox1.Items.Clear();
             InorderTraversal(data.Root);
 
             timeLabelBT.Text = $"Elapsed Time: {elapsedTime.TotalMilliseconds} ms";
@@ -90,7 +102,7 @@ namespace DataS
             stopwatch.Stop();
             TimeSpan elapsedTime = stopwatch.Elapsed;
 
-            ListBox.Items.Clear();
+            ListBox1.Items.Clear();
             InorderTraversal(data.Root);
 
             timeLabelBT.Text = $"Elapsed Time: {elapsedTime.TotalMilliseconds} ms";
@@ -103,7 +115,7 @@ namespace DataS
                 return;
 
             InorderTraversal(currentNode.Left);
-            ListBox.Items.Add(currentNode.Data);
+            ListBox1.Items.Add(currentNode.Data);
             InorderTraversal(currentNode.Right);
 
         }
@@ -164,6 +176,15 @@ namespace DataS
             {
                 MessageBox.Show("enter a valid integer to search.");
             }
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            data = null; // Clear the binary tree data
+            ListBox1.Items.Clear(); // Clear the ListBox
+            timeLabelBT.Text = "Elapsed Time: "; // Clear the time label
+            searchBox.Text = ""; // Clear the search box
+            searchboxtwo.Text = ""; // Clear the second search box
         }
     }
 
