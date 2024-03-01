@@ -2,230 +2,177 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
+using System.IO; // Add this namespace for File operations
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace DataS
 {
     public partial class Form4 : Form
     {
-        private LinkedList<int> data;
-
+        private MyLinkList<String> data;
+        private Stopwatch stopwatch;
         public Form4()
         {
             InitializeComponent();
-            data = new LinkedList<int>();
-
+            stopwatch = new Stopwatch();
         }
 
-        private int GetTargetValue()
+        private void ImportButtonform4_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-        //bubble sort input data 
-        private void BubbleSortButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private int[] ThebubbleSort()
-        {
-            outPut.Items.Clear();
-
-            int[] data = ParseInputArray();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            data = BubbleSortLink.Sort(data);
-            stopwatch.Stop();
-            double elapsedTime = stopwatch.Elapsed.TotalSeconds;
-
-            outPut.Items.Add("bubble Sort Result:");
-            outPut.Items.Add("Sorted array: " + string.Join(", ", data));
-            outPut.Items.Add("Sorting time: " + elapsedTime.ToString("0.000") + " seconds");
-
-            outPut.Items.Clear();
-            foreach (int item in data)
-            {
-                outPut.Items.Add(item.ToString());
-            }
-
-            return data;
-        }
-
-        //comb sort input data
-
-        private int[] TheCombSort()
-        {
-            outPut.Items.Clear();
-
-            int[] data = ParseInputArray();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            data = CombSortLink.Sort(data);
-            stopwatch.Stop();
-            double elapsedTime = stopwatch.Elapsed.TotalSeconds;
-
-            outPut.Items.Add("Comb Sort Result:");
-            outPut.Items.Add("Sorted array: " + string.Join(", ", data));
-            outPut.Items.Add("Sorting time: " + elapsedTime.ToString("0.000") + " seconds");
-
-            outPut.Items.Clear();
-            foreach (int item in data)
-            {
-                outPut.Items.Add(item.ToString());
-            }
-
-            return data;
-        }
-
-        // Parse the input data from the inputArea and return it as an array
-        private int[] ParseInputArray()
-        {
-            //string[] inputArray = inputArea.Text.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            //int[] data = Array.ConvertAll(inputArray, int.Parse);
-
-            int[] data = new int[outputListBox.Items.Count];
-            for (int i = 0; i < outputListBox.Items.Count; i++)
-            {
-                data[i] = int.Parse(outputListBox.Items[i].ToString());
-                //MessageBox.Show(data[i].ToString());
-            }
-
-            return data;
-        }
-
-
-        private void importCSV_Click(object sender, EventArgs e)
-        {
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "CSV Files (*.csv)|*.csv";
+            openFileDialog.Filter = "CSV Files|*.csv";
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string filePath = openFileDialog.FileName;
-                List<string[]> data = ReadCSV(filePath);
+                string[] lines = File.ReadAllLines(openFileDialog.FileName);
+                data = new MyLinkList<string>(); // Correct data type to MyLinkList<string>
 
-                outputListBox.Items.Clear();
-                foreach (string[] row in data)
+                foreach (string line in lines)
                 {
-                    outputListBox.Items.Add(string.Join(", ", row));
+                    data.Add(line); // Add each line as a string
+                    ListBoxList.Items.Add(line); // Add each line to the ListBox
                 }
+
+                MessageBox.Show("CSV file imported!");
             }
         }
 
-        private List<string[]> ReadCSV(string filePath)
+        private void compbutton_Click(object sender, EventArgs e)
         {
-            List<string[]> data = new List<string[]>();
-            using (StreamReader reader = new StreamReader(filePath))
+            if (data == null)
             {
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-                    string[] values = line.Split(',');
-                    data.Add(values);
-                }
-            }
-            return data;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LinearSearchButton_Click(object sender, EventArgs e)
-        {
-            int target;
-            if (!int.TryParse(textBox1.Text, out target))
-            {
-                MessageBox.Show("Invalid search value. Please enter a valid integer.");
+                MessageBox.Show("No data imported. Please import a CSV file first.");
                 return;
             }
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            int index = -1;
-            for (int i = 0; i < outputListBox.Items.Count; i++)
-            {
-                if (outputListBox.Items[i].ToString() == target.ToString())
-                {
-                    index = i;
-                    break;
-                }
-            }
-            stopwatch.Stop();
-            double elapsedTime = stopwatch.Elapsed.TotalSeconds;
+            stopwatch.Reset(); // Reset the stopwatch
+            stopwatch.Start(); // Start the stopwatch
 
-            if (index != -1)
+            var dataArray = data.ToArray();
+            CombSortLink.Sort(dataArray);
+
+            stopwatch.Stop(); // Stop the stopwatch
+            TimeSpan elapsedTime = stopwatch.Elapsed; // Get the elapsed time
+
+            ListBoxList.Items.Clear();
+            foreach (var item in dataArray)
             {
-                MessageBox.Show("Linear Search Result:\n\n" +
-                    "Element " + target + " is found at index: " + index + ".\n" +
-                    "Search time: " + elapsedTime.ToString("0.000") + " seconds");
+                ListBoxList.Items.Add(item);
             }
-            else
-            {
-                MessageBox.Show("Linear Search Result:\n\n" +
-                    "Element " + target + " is not present in the dataset.\n" +
-                    "Search time: " + elapsedTime.ToString("0.000") + " seconds");
-            }
+
+            timeLabelLT.Text = $"Elapsed Time: {elapsedTime.TotalMilliseconds} ms"; // Display the elapsed time
         }
 
-        private void binarySearchButton_Click_1(object sender, EventArgs e)
+
+        private void bubblebuttonbubble_Click_1(object sender, EventArgs e)
         {
-            int target;
-            if (!int.TryParse(textBox2.Text, out target))
+            if (data == null)
             {
-                MessageBox.Show("Invalid search value. Please enter a valid integer.");
+                MessageBox.Show("No data imported. Please import a CSV file first.");
                 return;
             }
 
-            int[] data = new int[outputListBox.Items.Count];
-            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Reset();
             stopwatch.Start();
 
-            data = TheCombSort();
+            var dataArray = data.ToArray();
+            BubbleSortLink.Sort(dataArray);
 
-            int index = BinarySearchLink.Search(data, target);
             stopwatch.Stop();
-            double elapsedTime = stopwatch.Elapsed.TotalSeconds;
+            TimeSpan elapsedTime = stopwatch.Elapsed;
+
+            ListBoxList.Items.Clear();
+            foreach (var item in dataArray)
+            {
+                ListBoxList.Items.Add(item);
+            }
+
+            timeLabelLT.Text = $"Elapsed Time: {elapsedTime.TotalMilliseconds} ms";
+        }
+
+        private void linearbutton_Click_1(object sender, EventArgs e)
+        {
+            if (data == null)
+            {
+                MessageBox.Show("No data imported. Please import a CSV file first.");
+                return;
+            }
+
+            string target = searchboxtwo.Text;
+            LinearSearchList<string> linearSearchList = new LinearSearchList<string>();
+            var currentNode = data.GetFirstNode();
+            while (currentNode != null)
+            {
+                linearSearchList.Add(currentNode.Value);
+                currentNode = currentNode.Next;
+            }
+
+            stopwatch.Reset();
+            stopwatch.Start();
+
+            int index = linearSearchList.LinearSearch(target);
+
+            stopwatch.Stop();
+            TimeSpan elapsedTime = stopwatch.Elapsed;
 
             if (index != -1)
             {
-                MessageBox.Show("Binary Search Result:\n\n" +
-                    "Element " + target + " is found at index: " + index + ".\n" +
-                    "Search time: " + elapsedTime.ToString("0.000") + " seconds");
+                MessageBox.Show($"Number found at index {index}.");
             }
             else
             {
-                MessageBox.Show("Binary Search Result:\n\n" +
-                    "Element " + target + " is not present in the dataset.\n" +
-                    "Search time: " + elapsedTime.ToString("0.000") + " seconds");
+                MessageBox.Show("Number not found.");
             }
+
+            timeLabelLT.Text = $"Elapsed Time: {elapsedTime.TotalMilliseconds} ms";
         }
 
-        private void combSortButton_Click_1(object sender, EventArgs e)
+        private void binarybutton_Click(object sender, EventArgs e)
         {
-            TheCombSort();
+            if (data == null)
+            {
+                MessageBox.Show("No data imported. Please import a CSV file first.");
+                return;
+            }
+
+            string target = searchBox.Text;
+            var dataArray = data.ToArray();
+
+            stopwatch.Reset();
+            stopwatch.Start();
+
+            int index = BinarySearchLink.Search<string>(dataArray, target, Comparer<string>.Default);
+
+            stopwatch.Stop();
+            TimeSpan elapsedTime = stopwatch.Elapsed;
+
+            if (index != -1)
+            {
+                MessageBox.Show($"Target found at index {index}.");
+            }
+            else
+            {
+                MessageBox.Show("Target not found.");
+            }
+
+            timeLabelLT.Text = $"Elapsed Time: {elapsedTime.TotalMilliseconds} ms";
         }
 
-        private void bubbleSortButton_Click_1(object sender, EventArgs e)
+        private void resetButton_Click_1(object sender, EventArgs e)
         {
-            ThebubbleSort();
+            data = null;
+            ListBoxList.Items.Clear();
+            searchBox.Clear();
+            searchboxtwo.Clear();
+            timeLabelLT.Text = "Elapsed Time: ";
         }
     }
 }
+

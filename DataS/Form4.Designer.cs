@@ -1,9 +1,10 @@
 ﻿namespace DataS
 {
     partial class Form4
-    {/// <summary>
-     /// Required designer variable.
-     /// </summary>
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -27,148 +28,145 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.binarySearchButton = new System.Windows.Forms.Button();
-            this.bubbleSortButton = new System.Windows.Forms.Button();
-            this.combSortButton = new System.Windows.Forms.Button();
-            this.LinearSearchButton = new System.Windows.Forms.Button();
-            this.outputListBox = new System.Windows.Forms.ListBox();
-            this.inputArea = new System.Windows.Forms.ListBox();
-            this.importCSV = new System.Windows.Forms.Button();
-            this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.outPut = new System.Windows.Forms.ListBox();
-            this.SuspendLayout();
+            resetButton = new Button();
+            searchboxtwo = new TextBox();
+            ListBoxList = new ListBox();
+            searchBox = new TextBox();
+            timeLabelLT = new Label();
+            ImportButtonform4 = new Button();
+            linearbutton = new Button();
+            binarybutton = new Button();
+            bubblebuttonbubble = new Button();
+            compbutton = new Button();
+            SuspendLayout();
             // 
-            // binarySearchButton
+            // resetButton
             // 
-            this.binarySearchButton.Location = new System.Drawing.Point(326, 78);
-            this.binarySearchButton.Name = "binarySearchButton";
-            this.binarySearchButton.Size = new System.Drawing.Size(150, 34);
-            this.binarySearchButton.TabIndex = 7;
-            this.binarySearchButton.Text = "Binary Search";
-            this.binarySearchButton.Click += new System.EventHandler(this.binarySearchButton_Click_1);
+            resetButton.Location = new Point(596, 334);
+            resetButton.Name = "resetButton";
+            resetButton.Size = new Size(75, 23);
+            resetButton.TabIndex = 29;
+            resetButton.Text = "Reset";
+            resetButton.UseVisualStyleBackColor = true;
+            resetButton.Click += resetButton_Click_1;
             // 
-            // bubbleSortButton
+            // searchboxtwo
             // 
-            this.bubbleSortButton.Location = new System.Drawing.Point(326, 182);
-            this.bubbleSortButton.Name = "bubbleSortButton";
-            this.bubbleSortButton.Size = new System.Drawing.Size(150, 37);
-            this.bubbleSortButton.TabIndex = 8;
-            this.bubbleSortButton.Text = "Bubble Sort";
-            this.bubbleSortButton.Click += new System.EventHandler(this.bubbleSortButton_Click_1);
+            searchboxtwo.Location = new Point(264, 307);
+            searchboxtwo.Margin = new Padding(3, 2, 3, 2);
+            searchboxtwo.Name = "searchboxtwo";
+            searchboxtwo.Size = new Size(110, 23);
+            searchboxtwo.TabIndex = 28;
             // 
-            // combSortButton
+            // ListBoxList
             // 
-            this.combSortButton.Location = new System.Drawing.Point(326, 237);
-            this.combSortButton.Name = "combSortButton";
-            this.combSortButton.Size = new System.Drawing.Size(150, 38);
-            this.combSortButton.TabIndex = 9;
-            this.combSortButton.Text = "Comb Sort";
-            this.combSortButton.Click += new System.EventHandler(this.combSortButton_Click_1);
+            ListBoxList.FormattingEnabled = true;
+            ListBoxList.ItemHeight = 15;
+            ListBoxList.Location = new Point(454, 125);
+            ListBoxList.Margin = new Padding(3, 2, 3, 2);
+            ListBoxList.Name = "ListBoxList";
+            ListBoxList.Size = new Size(238, 169);
+            ListBoxList.TabIndex = 27;
             // 
-            // LinearSearchButton
+            // searchBox
             // 
-            this.LinearSearchButton.Location = new System.Drawing.Point(326, 130);
-            this.LinearSearchButton.Name = "LinearSearchButton";
-            this.LinearSearchButton.Size = new System.Drawing.Size(150, 36);
-            this.LinearSearchButton.TabIndex = 10;
-            this.LinearSearchButton.Text = "Linear Search";
-            this.LinearSearchButton.Click += new System.EventHandler(this.LinearSearchButton_Click);
+            searchBox.Location = new Point(264, 215);
+            searchBox.Margin = new Padding(3, 2, 3, 2);
+            searchBox.Name = "searchBox";
+            searchBox.Size = new Size(110, 23);
+            searchBox.TabIndex = 26;
             // 
-            // outputListBox
+            // timeLabelLT
             // 
-            this.outputListBox.FormattingEnabled = true;
-            this.outputListBox.ItemHeight = 16;
-            this.outputListBox.Location = new System.Drawing.Point(631, 121);
-            this.outputListBox.Name = "outputListBox";
-            this.outputListBox.Size = new System.Drawing.Size(157, 244);
-            this.outputListBox.TabIndex = 11;
+            timeLabelLT.AutoSize = true;
+            timeLabelLT.Location = new Point(303, 110);
+            timeLabelLT.Name = "timeLabelLT";
+            timeLabelLT.Size = new Size(45, 15);
+            timeLabelLT.TabIndex = 25;
+            timeLabelLT.Text = "TEsting";
             // 
-            // inputArea
+            // ImportButtonform4
             // 
-            this.inputArea.FormattingEnabled = true;
-            this.inputArea.ItemHeight = 16;
-            this.inputArea.Location = new System.Drawing.Point(33, 38);
-            this.inputArea.Name = "inputArea";
-            this.inputArea.Size = new System.Drawing.Size(172, 116);
-            this.inputArea.TabIndex = 13;
+            ImportButtonform4.Location = new Point(580, 43);
+            ImportButtonform4.Name = "ImportButtonform4";
+            ImportButtonform4.Size = new Size(112, 52);
+            ImportButtonform4.TabIndex = 24;
+            ImportButtonform4.Text = "Import CSV";
+            ImportButtonform4.UseVisualStyleBackColor = true;
+            ImportButtonform4.Click += ImportButtonform4_Click;
             // 
-            // importCSV
+            // linearbutton
             // 
-            this.importCSV.Location = new System.Drawing.Point(671, 18);
-            this.importCSV.Name = "importCSV";
-            this.importCSV.Size = new System.Drawing.Size(105, 30);
-            this.importCSV.TabIndex = 14;
-            this.importCSV.Text = "Import CSV";
-            this.importCSV.UseVisualStyleBackColor = true;
-            this.importCSV.Click += new System.EventHandler(this.importCSV_Click);
+            linearbutton.Location = new Point(108, 291);
+            linearbutton.Name = "linearbutton";
+            linearbutton.Size = new Size(112, 52);
+            linearbutton.TabIndex = 23;
+            linearbutton.Text = "Linear Search";
+            linearbutton.UseVisualStyleBackColor = true;
+            linearbutton.Click += linearbutton_Click_1;
             // 
-            // directorySearcher1
+            // binarybutton
             // 
-            this.directorySearcher1.ClientTimeout = System.TimeSpan.Parse("-00:00:01");
-            this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
-            this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
+            binarybutton.Location = new Point(108, 199);
+            binarybutton.Name = "binarybutton";
+            binarybutton.Size = new Size(112, 52);
+            binarybutton.TabIndex = 22;
+            binarybutton.Text = "Binery Search";
+            binarybutton.UseVisualStyleBackColor = true;
+            binarybutton.Click += binarybutton_Click;
             // 
-            // textBox2
+            // bubblebuttonbubble
             // 
-            this.textBox2.Location = new System.Drawing.Point(487, 83);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(104, 22);
-            this.textBox2.TabIndex = 15;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            bubblebuttonbubble.Location = new Point(108, 118);
+            bubblebuttonbubble.Name = "bubblebuttonbubble";
+            bubblebuttonbubble.Size = new Size(112, 52);
+            bubblebuttonbubble.TabIndex = 21;
+            bubblebuttonbubble.Text = "BubbleSort";
+            bubblebuttonbubble.UseVisualStyleBackColor = true;
+            bubblebuttonbubble.Click += bubblebuttonbubble_Click_1;
             // 
-            // textBox1
+            // compbutton
             // 
-            this.textBox1.Location = new System.Drawing.Point(487, 137);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(104, 22);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            compbutton.Location = new Point(108, 43);
+            compbutton.Name = "compbutton";
+            compbutton.Size = new Size(112, 52);
+            compbutton.TabIndex = 20;
+            compbutton.Text = "CombSort";
+            compbutton.UseVisualStyleBackColor = true;
+            compbutton.Click += compbutton_Click;
             // 
-            // outPut
+            // Form4
             // 
-            this.outPut.FormattingEnabled = true;
-            this.outPut.ItemHeight = 16;
-            this.outPut.Location = new System.Drawing.Point(33, 182);
-            this.outPut.Name = "outPut";
-            this.outPut.Size = new System.Drawing.Size(157, 244);
-            this.outPut.TabIndex = 17;
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.outPut);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.importCSV);
-            this.Controls.Add(this.inputArea);
-            this.Controls.Add(this.binarySearchButton);
-            this.Controls.Add(this.bubbleSortButton);
-            this.Controls.Add(this.combSortButton);
-            this.Controls.Add(this.LinearSearchButton);
-            this.Controls.Add(this.outputListBox);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 401);
+            Controls.Add(resetButton);
+            Controls.Add(searchboxtwo);
+            Controls.Add(ListBoxList);
+            Controls.Add(searchBox);
+            Controls.Add(timeLabelLT);
+            Controls.Add(ImportButtonform4);
+            Controls.Add(linearbutton);
+            Controls.Add(binarybutton);
+            Controls.Add(bubblebuttonbubble);
+            Controls.Add(compbutton);
+            Name = "Form4";
+            Text = "Form4";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-        private System.Windows.Forms.Button binarySearchButton;
-        private System.Windows.Forms.Button bubbleSortButton;
-        private System.Windows.Forms.Button combSortButton;
-        private System.Windows.Forms.Button LinearSearchButton;
-        private System.Windows.Forms.ListBox outputListBox;
-        private System.Windows.Forms.ListBox inputArea;
-        private System.Windows.Forms.Button importCSV;
-        private System.DirectoryServices.DirectorySearcher directorySearcher1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListBox outPut;
 
+        private Button resetButton;
+        private TextBox searchboxtwo;
+        private ListBox ListBoxList;
+        private TextBox searchBox;
+        private Label timeLabelLT;
+        private Button ImportButtonform4;
+        private Button linearbutton;
+        private Button binarybutton;
+        private Button bubblebuttonbubble;
+        private Button compbutton;
     }
 }

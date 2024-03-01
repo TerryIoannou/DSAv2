@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace DataS
 {
     public partial class Form2 : Form
     {
-        private MyArrayList<int> data;
+        private MyArrayList<string> data; // Change data type to string
 
         public Form2()
         {
@@ -34,15 +35,12 @@ namespace DataS
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string[] lines = File.ReadAllLines(openFileDialog.FileName);
-                data = new MyArrayList<int>();
+                data = new MyArrayList<string>(); // Change to string type
 
                 foreach (string line in lines)
                 {
-                    if (int.TryParse(line, out int value))
-                    {
-                        data.Add(value);
-                        test.Items.Add(value);
-                    }
+                    data.Add(line); // Add each line as a string
+                    test.Items.Add(line); // Add each line to the ListBox
                 }
 
                 MessageBox.Show("CSV file imported!");
@@ -101,26 +99,21 @@ namespace DataS
         {
             if (data == null || data.Count == 0)
             {
-                MessageBox.Show("No data.import CSV file first.");
+                MessageBox.Show("No data. Import CSV file first.");
                 return;
             }
 
-            if (!int.TryParse(searchBox.Text, out int target))
-            {
-                MessageBox.Show("Incorrect number. InPut a valid integer.");
-                return;
-            }
-
-            int index = BinarySearchAlgorithm.BinarySearch(data, target);
+            string target = searchBox.Text; // Parse target as string
+            int index = BinarySearchAlgorithm.BinarySearch(data, target); // Perform binary search with string target
 
             if (index != -1)
             {
-                int foundNumber = data[index];
-                searchLabel.Text = $"Number found: {foundNumber}";
+                string foundItem = data[index];
+                searchLabel.Text = $"Item found: {foundItem}";
             }
             else
             {
-                searchLabel.Text = $"Number does not found.";
+                searchLabel.Text = $"Item does not found.";
             }
 
             UpdateListBox();
@@ -145,20 +138,21 @@ namespace DataS
                 return;
             }
 
-            int target;
-            if (int.TryParse(linearSearch.Text, out target))
-            {
-                int result = LinearSearch.LinearSearchAlgorithm(data, target);
+            string target = linearSearch.Text; // Change to string type
+            int result = LinearSearch.LinearSearchAlgorithm(data, target); // Change to string type
 
-                if (result != -1)
-                    MessageBox.Show("Target found at index: " + result);
-                else
-                    MessageBox.Show("Target not found.");
-            }
+            if (result != -1)
+                MessageBox.Show("Target found at index: " + result);
             else
-            {
-                MessageBox.Show("Please enter a valid integer.");
-            }
+                MessageBox.Show("Target not found.");
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            data = null; // Clear the data
+            test.Items.Clear(); // Clear the ListBox
+            timeLabel.Text = "Elapsed Time: "; // Clear the time label
+            searchLabel.Text = " "; // Clear the search label
         }
     }
 }

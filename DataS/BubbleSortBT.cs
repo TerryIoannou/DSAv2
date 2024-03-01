@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataS
 {
     public static class BubbleSortBT
     {
-        public static void BubbleSort(BinaryTree<int> data)
+        public static void BubbleSort<T>(BinaryTree<T> data) where T : IComparable<T>
         {
-            List<int> elements = InorderTraversal(data.Root);
+            List<T> elements = InorderTraversal(data.Root);
 
             int n = elements.Count;
             bool swapped;
@@ -21,9 +18,9 @@ namespace DataS
 
                 for (int j = 0; j < n - i - 1; j++)
                 {
-                    if (elements[j] > elements[j + 1])
+                    if (elements[j].CompareTo(elements[j + 1]) > 0)
                     {
-                        int temp = elements[j];
+                        T temp = elements[j];
                         elements[j] = elements[j + 1];
                         elements[j + 1] = temp;
                         swapped = true;
@@ -37,14 +34,14 @@ namespace DataS
             data.Root = BuildTree(elements, 0, elements.Count - 1);
         }
 
-        private static List<int> InorderTraversal(BinaryTreeNode<int> currentNode)
+        private static List<T> InorderTraversal<T>(BinaryTreeNode<T> currentNode)
         {
-            List<int> elements = new List<int>();
+            List<T> elements = new List<T>();
             InorderTraversalRecursively(currentNode, elements);
             return elements;
         }
 
-        private static void InorderTraversalRecursively(BinaryTreeNode<int> currentNode, List<int> elements)
+        private static void InorderTraversalRecursively<T>(BinaryTreeNode<T> currentNode, List<T> elements)
         {
             if (currentNode == null)
                 return;
@@ -54,13 +51,13 @@ namespace DataS
             InorderTraversalRecursively(currentNode.Right, elements);
         }
 
-        private static BinaryTreeNode<int> BuildTree(List<int> elements, int start, int end)
+        private static BinaryTreeNode<T> BuildTree<T>(List<T> elements, int start, int end)
         {
             if (start > end)
                 return null;
 
             int mid = (start + end) / 2;
-            BinaryTreeNode<int> node = new BinaryTreeNode<int>(elements[mid]);
+            BinaryTreeNode<T> node = new BinaryTreeNode<T>(elements[mid]);
 
             node.Left = BuildTree(elements, start, mid - 1);
             node.Right = BuildTree(elements, mid + 1, end);

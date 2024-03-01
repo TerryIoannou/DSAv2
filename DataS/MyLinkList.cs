@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataS
 {
@@ -16,18 +13,25 @@ namespace DataS
             linkedList = new LinkedList<T>();
         }
 
+        public void Add(T value)
+        {
+            linkedList.AddLast(value);
+            if (linkedList.Count == 1)
+                firstNode = linkedList.First;
+        }
+
         public void AddFirst(T value)
         {
-            LinkedListNode<T> newNode = linkedList.AddFirst(value);
+            linkedList.AddFirst(value);
             if (linkedList.Count == 1)
-                firstNode = newNode;
+                firstNode = linkedList.First;
         }
 
         public void AddLast(T value)
         {
-            LinkedListNode<T> newNode = linkedList.AddLast(value);
+            linkedList.AddLast(value);
             if (linkedList.Count == 1)
-                firstNode = newNode;
+                firstNode = linkedList.First;
         }
 
         public bool Remove(T value)
@@ -61,5 +65,4 @@ namespace DataS
             return firstNode;
         }
     }
-
 }

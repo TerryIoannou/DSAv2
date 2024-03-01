@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataS
 {
@@ -49,12 +46,6 @@ namespace DataS
 
         private void InsertRecursively(BinaryTreeNode<T> currentNode, BinaryTreeNode<T> newNode)
         {
-            if (currentNode == null)
-            {
-                currentNode = newNode;
-                return;
-            }
-
             if (Comparer<T>.Default.Compare(newNode.Data, currentNode.Data) < 0)
             {
                 if (currentNode.Left == null)
@@ -106,5 +97,4 @@ namespace DataS
             }
         }
     }
-
 }

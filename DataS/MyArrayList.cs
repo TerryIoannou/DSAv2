@@ -1,39 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 
-namespace DataS
+public class MyArrayList<T> : IEnumerable<T> where T : IComparable<T>
 {
-    public class MyArrayList<T>
+    private List<T> list;
+
+    public MyArrayList()
     {
-        private List<T> list;
+        list = new List<T>();
+    }
 
-        public MyArrayList()
-        {
-            list = new List<T>();
-        }
+    public int Count => list.Count;
 
-        public void Add(T item)
-        {
-            list.Add(item);
-        }
+    public void Add(T item)
+    {
+        list.Add(item);
+    }
 
-        public bool Remove(T item)  
+    public T this[int index]
+    {
+        get
         {
-            return list.Remove(item);
-        }
+            if (index < 0 || index >= list.Count)
+            {
+                throw new IndexOutOfRangeException("Index is out of range");
+            }
 
-        public int Count
-        {
-            get { return list.Count; }
+            return list[index];
         }
+        set
+        {
+            if (index < 0 || index >= list.Count)
+            {
+                throw new IndexOutOfRangeException("Index is out of range");
+            }
 
-        public T this[int index]
-        {
-            get { return list[index]; }
-            set { list[index] = value; }
+            list[index] = value;
         }
+    }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        return list.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 }

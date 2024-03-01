@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataS
 {
-    class LinearSearch
+    public class LinearSearch
     {
-        public static int LinearSearchAlgorithm<T>(MyArrayList<T> arr, T target)
+        public static int LinearSearchAlgorithm<T>(IEnumerable<T> collection, T target)
         {
-            for (int i = 0; i < arr.Count; i++)
+            int index = 0;
+            foreach (var item in collection)
             {
-                if (arr[i].Equals(target))
-                    return i;
+                if (item.Equals(target))
+                    return index;
+                index++;
             }
 
             return -1;

@@ -38,14 +38,14 @@
             searchLabel = new Label();
             button3 = new Button();
             linearSearch = new TextBox();
+            resetButton = new Button();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(178, 64);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(156, 48);
             button1.Name = "button1";
-            button1.Size = new Size(128, 69);
+            button1.Size = new Size(112, 52);
             button1.TabIndex = 0;
             button1.Text = "CombSort";
             button1.UseVisualStyleBackColor = true;
@@ -53,10 +53,9 @@
             // 
             // bubblesort
             // 
-            bubblesort.Location = new Point(178, 164);
-            bubblesort.Margin = new Padding(3, 4, 3, 4);
+            bubblesort.Location = new Point(156, 123);
             bubblesort.Name = "bubblesort";
-            bubblesort.Size = new Size(128, 69);
+            bubblesort.Size = new Size(112, 52);
             bubblesort.TabIndex = 1;
             bubblesort.Text = "BubbleSort";
             bubblesort.UseVisualStyleBackColor = true;
@@ -64,10 +63,9 @@
             // 
             // button4
             // 
-            button4.Location = new Point(178, 399);
-            button4.Margin = new Padding(3, 4, 3, 4);
+            button4.Location = new Point(156, 299);
             button4.Name = "button4";
-            button4.Size = new Size(128, 69);
+            button4.Size = new Size(112, 52);
             button4.TabIndex = 3;
             button4.Text = "Linear Search";
             button4.UseVisualStyleBackColor = true;
@@ -75,10 +73,9 @@
             // 
             // ImportButton
             // 
-            ImportButton.Location = new Point(718, 64);
-            ImportButton.Margin = new Padding(3, 4, 3, 4);
+            ImportButton.Location = new Point(628, 48);
             ImportButton.Name = "ImportButton";
-            ImportButton.Size = new Size(128, 69);
+            ImportButton.Size = new Size(112, 52);
             ImportButton.TabIndex = 5;
             ImportButton.Text = "Import CSV";
             ImportButton.UseVisualStyleBackColor = true;
@@ -87,40 +84,43 @@
             // timeLabel
             // 
             timeLabel.AutoSize = true;
-            timeLabel.Location = new Point(405, 138);
+            timeLabel.Location = new Point(354, 104);
             timeLabel.Name = "timeLabel";
-            timeLabel.Size = new Size(0, 20);
+            timeLabel.Size = new Size(0, 15);
             timeLabel.TabIndex = 6;
             // 
             // searchBox
             // 
-            searchBox.Location = new Point(357, 294);
+            searchBox.Location = new Point(312, 220);
+            searchBox.Margin = new Padding(3, 2, 3, 2);
             searchBox.Name = "searchBox";
-            searchBox.Size = new Size(125, 27);
+            searchBox.Size = new Size(110, 23);
             searchBox.TabIndex = 7;
             // 
             // test
             // 
             test.FormattingEnabled = true;
-            test.ItemHeight = 20;
-            test.Location = new Point(718, 164);
+            test.ItemHeight = 15;
+            test.Location = new Point(544, 137);
+            test.Margin = new Padding(3, 2, 3, 2);
             test.Name = "test";
-            test.Size = new Size(128, 304);
+            test.Size = new Size(227, 214);
             test.TabIndex = 9;
             // 
             // searchLabel
             // 
             searchLabel.AutoSize = true;
-            searchLabel.Location = new Point(471, 344);
+            searchLabel.Location = new Point(412, 258);
             searchLabel.Name = "searchLabel";
-            searchLabel.Size = new Size(0, 20);
+            searchLabel.Size = new Size(0, 15);
             searchLabel.TabIndex = 11;
             // 
             // button3
             // 
-            button3.Location = new Point(178, 266);
+            button3.Location = new Point(156, 200);
+            button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(128, 82);
+            button3.Size = new Size(112, 62);
             button3.TabIndex = 12;
             button3.Text = "Binary Search";
             button3.UseVisualStyleBackColor = true;
@@ -128,16 +128,28 @@
             // 
             // linearSearch
             // 
-            linearSearch.Location = new Point(357, 411);
+            linearSearch.Location = new Point(312, 308);
+            linearSearch.Margin = new Padding(3, 2, 3, 2);
             linearSearch.Name = "linearSearch";
-            linearSearch.Size = new Size(125, 27);
+            linearSearch.Size = new Size(110, 23);
             linearSearch.TabIndex = 13;
+            // 
+            // resetButton
+            // 
+            resetButton.Location = new Point(628, 384);
+            resetButton.Name = "resetButton";
+            resetButton.Size = new Size(75, 23);
+            resetButton.TabIndex = 14;
+            resetButton.Text = "Reset";
+            resetButton.UseVisualStyleBackColor = true;
+            resetButton.Click += resetButton_Click;
             // 
             // Form2
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
+            Controls.Add(resetButton);
             Controls.Add(linearSearch);
             Controls.Add(button3);
             Controls.Add(searchLabel);
@@ -148,7 +160,6 @@
             Controls.Add(button4);
             Controls.Add(bubblesort);
             Controls.Add(button1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Form2";
             Text = "Form2";
             ResumeLayout(false);
@@ -167,5 +178,6 @@
         private Label searchLabel;
         private Button button3;
         private TextBox linearSearch;
+        private Button resetButton;
     }
 }
