@@ -52,7 +52,7 @@
             label1.Name = "label1";
             label1.Size = new Size(148, 20);
             label1.TabIndex = 1;
-            label1.Text = "Select Data Strucuter";
+            label1.Text = "Select Data Structure";
             // 
             // button3
             // 

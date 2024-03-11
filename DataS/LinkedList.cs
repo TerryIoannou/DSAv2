@@ -4,61 +4,63 @@ using System;
 
 namespace DataS
 {
-    public class Node<T>
+    public class LinkedListNode<T>
     {
-        public T Data { get; set; }
-        public Node<T> Next { get; set; }
+        public T Value { get; set; }
+        public LinkedListNode<T> Next { get; set; }
 
-        public Node(T data)
+        public LinkedListNode(T value)
         {
-            Data = data;
-            Next = null;
+            this.Value = value;
+            this.Next = null;
         }
     }
 
     public class LinkedList<T>
     {
-        private Node<T> head;
+        private LinkedListNode<T> Head;
 
-        public bool CompareBy(Node<T> other)
+        public bool CompareBy(LinkedListNode<T> other)
         {
-            if ()
-            {
-                return;
-            }
             return false;
         }
 
+        public LinkedListNode<T> GetFirstNode()
+        {
+            return Head;
+        }
+
+
         public void AddFirst(T data)
         {
-            Node<T> newNode = new Node<T>(data);
-            newNode.Next = head;
-            head = newNode;
+            LinkedListNode<T> newLinkedListNode = new LinkedListNode<T>(data);
+            newLinkedListNode.Next = Head;
+            Head = newLinkedListNode;
         }
 
         public void AddLast(T data)
         {
-            Node<T> newNode = new Node<T>(data);
-            if (head == null)
+            LinkedListNode<T> newLinkedListNode = new LinkedListNode<T>(data);
+            if (Head == null)
             {
-                head = newNode;
+                Head = newLinkedListNode;
                 return;
             }
 
-            Node<T> current = head;
+            LinkedListNode<T> current = Head;
             while (current.Next != null)
             {
                 current = current.Next;
             }
-            current.Next = newNode;
+            current.Next = newLinkedListNode;
         }
 
         public void Display()
         {
-            Node<T> current = head;
+            LinkedListNode<T> current = Head;
             while (current != null)
             {
-                Console.Write(current.Data + " ");
+                Console.Write(current.Value + " ");
                 current = current.Next;
             }
             Console.WriteLine();
@@ -66,10 +68,10 @@ namespace DataS
 
         public bool Search(T data)
         {
-            Node<T> current = head;
+            LinkedListNode<T> current = Head;
             while (current != null)
             {
-                if (current.Data.Equals(data))
+                if (current.Value.Equals(data))
                 {
                     return true;
                 }
@@ -85,19 +87,19 @@ namespace DataS
 
         public void Remove(T data)
         {
-            if (head == null)
+            if (Head == null)
                 return;
 
-            if (head.Data.Equals(data))
+            if (Head.Value.Equals(data))
             {
-                head = head.Next;
+                Head = Head.Next;
                 return;
             }
 
-            Node<T> current = head;
+            LinkedListNode<T> current = Head;
             while (current.Next != null)
             {
-                if (current.Next.Data.Equals(data))
+                if (current.Next.Value.Equals(data))
                 {
                     current.Next = current.Next.Next;
                     return;
@@ -108,11 +110,11 @@ namespace DataS
 
         public T[] ToArray()
         {
-            if (head == null)
+            if (Head == null)
                 return new T[0];
 
             int count = 0;
-            Node<T> current = head;
+            LinkedListNode<T> current = Head;
             while (current != null)
             {
                 count++;
@@ -120,10 +122,10 @@ namespace DataS
             }
 
             T[] array = new T[count];
-            current = head;
+            current = Head;
             for (int i = 0; i < count; i++)
             {
-                array[i] = current.Data;
+                array[i] = current.Value;
                 current = current.Next;
             }
 

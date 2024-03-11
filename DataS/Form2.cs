@@ -15,7 +15,7 @@ namespace DataS
 {
     public partial class Form2 : Form
     {
-        private MyArrayList<string> data; // Change data type to string
+        private ArrayList<string> data; // Change data type to string
 
         public Form2()
         {
@@ -35,7 +35,7 @@ namespace DataS
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string[] lines = File.ReadAllLines(openFileDialog.FileName);
-                data = new MyArrayList<string>(); // Change to string type
+                data = new ArrayList<string>(); // Change to string type
 
                 foreach (string line in lines)
                 {

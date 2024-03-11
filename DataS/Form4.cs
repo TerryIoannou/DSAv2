@@ -16,7 +16,7 @@ namespace DataS
 {
     public partial class Form4 : Form
     {
-        private MyLinkList<String> data;
+        private LinkedList<String> data;
         private Stopwatch stopwatch;
         public Form4()
         {
@@ -32,11 +32,11 @@ namespace DataS
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string[] lines = File.ReadAllLines(openFileDialog.FileName);
-                data = new MyLinkList<string>(); // Correct data type to MyLinkList<string>
+                data = new LinkedList<string>(); // Correct data type to MyLinkList<string>
 
                 foreach (string line in lines)
                 {
-                    data.Add(line); // Add each line as a string
+                    data.AddLast(line); // Add each line as a string
                     ListBoxList.Items.Add(line); // Add each line to the ListBox
                 }
 

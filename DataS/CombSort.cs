@@ -5,7 +5,7 @@ namespace DataS
 {
     public static class CombSorting
     {
-        public static void CombSort(MyArrayList<int> data)
+        public static void CombSort(ArrayList<int> data)
         {
             double gap = data.Count;
             bool swapped = true;
@@ -37,7 +37,7 @@ namespace DataS
             }
         }
 
-        public static void CombSort(MyArrayList<string> data)
+        public static void CombSort(ArrayList<string> data)
         {
             double gap = data.Count;
             bool swapped = true;

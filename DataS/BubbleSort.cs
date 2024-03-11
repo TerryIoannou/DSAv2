@@ -5,7 +5,7 @@ namespace DataS
 {
     public static class BubbleSorting
     {
-        public static void BubbleSort(MyArrayList<int> data)
+        public static void BubbleSort(ArrayList<int> data)
         {
             int n = data.Count;
             bool swapped;
@@ -30,7 +30,7 @@ namespace DataS
             }
         }
 
-        public static void BubbleSort(MyArrayList<string> data)
+        public static void BubbleSort(ArrayList<string> data)
         {
             int n = data.Count;
             bool swapped;

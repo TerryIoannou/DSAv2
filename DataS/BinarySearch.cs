@@ -5,7 +5,7 @@ namespace DataS
 {
     public static class BinarySearchAlgorithm
     {
-        public static int BinarySearch(MyArrayList<int> data, int target)
+        public static int BinarySearch(ArrayList<int> data, int target)
         {
             int left = 0;
             int right = data.Count - 1;
@@ -26,7 +26,7 @@ namespace DataS
             return -1;
         }
 
-        public static int BinarySearch(MyArrayList<string> data, string target)
+        public static int BinarySearch(ArrayList<string> data, string target)
         {
             int left = 0;
             int right = data.Count - 1;
