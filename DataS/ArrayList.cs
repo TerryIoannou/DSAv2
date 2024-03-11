@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 
-public class MyArrayList<T> : IEnumerable<T> where T : IComparable<T>
+public class ArrayList<T> : IEnumerable<T> where T : IComparable<T>
 {
     private List<T> list;
 
-    public MyArrayList()
+    public ArrayList()
     {
         list = new List<T>();
     }
